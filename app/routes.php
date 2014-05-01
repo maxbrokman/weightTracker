@@ -22,7 +22,7 @@ Route::get('/', array( 'as' => 'home',
 
 Route::get('/me', 'WeightController@listAll' );
 
-Route::resource('weight', 'WeightController', array( 'only' => array( 'create', 'store' )));
+Route::resource('weight', 'WeightController', array( 'only' => array( 'create', 'store', 'destroy' )));
 
 Route::get('/login', array( 'as' => 'login',
     function()

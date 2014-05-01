@@ -51,6 +51,15 @@ class WeightController extends \BaseController {
         return Redirect::route('weight.create');
 	}
 
+    public function destroy( $id )
+    {
+        $weight = Weight::find($id);
+        $weight->delete();
+
+        Session::flash('message', 'Deleted the weight measurement');
+        return Redirect::action('WeightController@listAll');
+    }
+
     public function listAll()
     {
         $userId = Auth::user()->id;
