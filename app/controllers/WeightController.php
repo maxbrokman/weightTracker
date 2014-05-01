@@ -130,7 +130,7 @@ class WeightController extends \BaseController {
 
         $data = array();
 
-        return $data
+        return $data;
 
     }
 
