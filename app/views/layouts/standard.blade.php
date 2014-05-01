@@ -14,7 +14,7 @@
                 {{ HTML::activeNav('logout', 'Logout') }}
             @endif
         </ul>
-        <h3 class="text-muted">WTPro</h3>
+        <h3 class="text-muted"><a href="{{ URL::route('home') }}" class="text-muted">WTPro</a></h3>
     </header>
 
     @if ( Session::get('error') )
