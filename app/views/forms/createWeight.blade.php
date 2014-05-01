@@ -7,9 +7,13 @@
         @endforeach
     </ul>
 
-    {{ Form::label('weight', 'Weight (kgs)') }}
-    {{ Form::text('weight', '') }}
+    <div class="form-group">
+        {{ Form::label('weight', 'Weight (kgs)') }}
+        {{ Form::text('weight', '', array('class' => 'form-control' )) }}
+    </div>
 
-    {{ Form::submit('Add') }}
+    <div class="form-group">
+        {{ Form::submit('Add', array('class' => 'btn btn-default')) }}
+    </div>
 
 {{ Form::close() }}

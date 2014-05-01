@@ -37,7 +37,7 @@ class WeightController extends \BaseController {
         $validator = Validator::make( $data, $rules );
 
         if ( $validator->fails() ) {
-            return Redirect::action('WeightController@create')->withErrors( $validator );
+            return Redirect::back()->withErrors( $validator );
         }
 
 		$userId = Auth::user()->id;
@@ -47,8 +47,7 @@ class WeightController extends \BaseController {
         $weight->weight = Input::get('weight');
         $weight->user()->associate($user);
         $weight->save();
-
-        return Redirect::route('weight.create');
+        return Redirect::back()->with(array('message' => 'Measurement saved!'));
 	}
 
     public function destroy( $id )
@@ -57,7 +56,7 @@ class WeightController extends \BaseController {
         $weight->delete();
 
         Session::flash('message', 'Deleted the weight measurement!');
-        return Redirect::action('WeightController@listAll');
+        return Redirect::back();
     }
 
     public function listAll()
@@ -127,8 +126,14 @@ class WeightController extends \BaseController {
             ->orderBy('date', 'ASC')
             ->lists('weight', 'date');
 
-
         $data = array();
+
+        foreach ( $days as $date => $weight ) {
+            $obj = new stdClass();
+            $obj->date = $date;
+            $obj->weight = $weight;
+            $data[] = $obj;
+        }
 
         return $data;
 
