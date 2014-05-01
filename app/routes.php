@@ -23,41 +23,6 @@ Route::post('/login', array( 'as' => 'login', 'uses' => 'UserController@postLogi
 
 Route::get('/logout', array( 'as' => 'logout', 'uses' => 'UserController@getLogout' ));
 
-Route::get('/register', array( 'as' => 'register',
-    function ()
-    {
-        return View::make('forms.register');
-    }
-));
+Route::get('/register', array( 'as' => 'register', 'uses' => 'UserController@getRegister' ));
 
-Route::post('/register', array( 'as' => 'register',
-    function ()
-    {
-        $data = Input::all();
-
-        $rules = array(
-            'username'  => 'alpha_num|min:3|required',
-            'password'  => 'confirmed|min:6|required',
-            'email'     => 'email|required'
-        );
-
-        $validator = Validator::make($data, $rules);
-
-        if ( $validator->passes() ) {
-
-            $user = New User();
-            $user->username     = Input::get('user_name');
-            $user->password     = Hash::make( Input::get('password'));
-            $user->email        = Input::get('email');
-
-            $user->save();
-
-            Auth::login( $user );
-
-            return Redirect::route('home');
-
-        }
-
-        return Redirect::to('register')->withErrors($validator);
-    }
-));
+Route::post('/register', array( 'as' => 'register', 'uses' => 'UserController@postRegister' ));

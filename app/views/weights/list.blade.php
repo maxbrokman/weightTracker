@@ -64,7 +64,6 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
     <script>
-        console.log(weightDataJSON);
         new Morris.Line({
             // ID of the element in which to draw the chart.
             element: 'weight-graph',
@@ -81,6 +80,8 @@
             postUnits: "kg",
             // turn off hover
             hideHover: true,
+            //ymin false origin
+            ymin: 'auto',
             //xLabels: "day",
             xLabelFormat: function(x) {
                 return x.getDate() + ' / ' + ( x.getMonth() + 1 );

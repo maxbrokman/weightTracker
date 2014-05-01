@@ -8,7 +8,7 @@ class HomeController extends BaseController {
     public function getHome()
     {
         if ( !Auth::guest() ) {
-            //return Redirect::route('me');
+            return Redirect::route('me');
         }
 
         return View::make('homepage.landing');

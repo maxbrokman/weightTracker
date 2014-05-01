@@ -41,4 +41,39 @@ class UserController extends BaseController {
         Session::flash('message', 'Logged Out!');
         return Redirect::route('home');
     }
+
+    public function getRegister()
+    {
+        return View::make('register');
+    }
+
+    public function postRegister()
+    {
+        $data = Input::all();
+
+        $rules = array(
+            'username'  => 'alpha_num|min:3|required|unique:users',
+            'password'  => 'confirmed|min:6|required',
+            'email'     => 'email|required|unique:users'
+        );
+
+        $validator = Validator::make($data, $rules);
+
+        if ( $validator->passes() ) {
+
+            $user = New User();
+            $user->username     = Input::get('username');
+            $user->password     = Hash::make( Input::get('password'));
+            $user->email        = Input::get('email');
+
+            $user->save();
+
+            Auth::login( $user );
+
+            return Redirect::route('home');
+
+        }
+
+        return Redirect::to('register')->withErrors($validator);
+    }
 } 
