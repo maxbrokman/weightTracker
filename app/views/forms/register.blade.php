@@ -6,18 +6,24 @@
         @endforeach
     </ul>
 
-    {{ Form::label('username', 'Username') }}
-    {{ Form::text('username', '') }}
-
-    {{ Form::label('email', 'Email Address') }}
-    {{ Form::email('email', '') }}
-
-    {{ Form::label('password', 'Password') }}
-    {{ Form::password('password') }}
-
-    {{ Form::label('password_confirmation', 'Confirm Password') }}
-    {{ Form::password('password_confirmation') }}
-
-    {{ Form::submit('Register') }}
+    <div class="form-group">
+        {{ Form::label('username', 'Username') }}
+        {{ Form::text('username', '', array('class' => 'form-control')) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('email', 'Email Address') }}
+        {{ Form::email('email', '', array('class' => 'form-control')) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('password', 'Password') }}
+        {{ Form::password('password', array('class' => 'form-control')) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('password_confirmation', 'Confirm Password') }}
+        {{ Form::password('password_confirmation', array('class' => 'form-control')) }}
+    </div>
+    <div class="form-group">
+        {{ Form::submit('Register', array('class' => 'btn btn-block btn-lg btn-danger')) }}
+    </div>
 
 {{ Form::close() }}

@@ -79,7 +79,7 @@ class WeightController extends \BaseController {
     public function getWeightsWithChange( $userId )
     {
         $weights = Weight::where('user_id', '=', $userId)
-            ->orderBy('created_at')
+            ->orderBy('created_at', 'DESC')
             ->get( array(
                 'id',
                 'weight',
