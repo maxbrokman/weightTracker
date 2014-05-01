@@ -11,48 +11,17 @@
 |
 */
 
-Route::get('/', array( 'as' => 'home',
-    function()
-    {
-	    if ( !Auth::guest() ) {
-            return Redirect::action('WeightController@listAll');
-        }
-    }
-));
+Route::get('/', array( 'as' => 'home', 'uses' => 'HomeController@getHome' ));
 
-Route::get('/me', 'WeightController@listAll' );
+Route::get('/me', array( 'as' => 'me', 'uses' => 'WeightController@listAll' ));
 
 Route::resource('weight', 'WeightController', array( 'only' => array( 'create', 'store', 'destroy' )));
 
-Route::get('/login', array( 'as' => 'login',
-    function()
-    {
-        return View::make('forms.login');
-    }
-));
+Route::get('/login', array( 'as' => 'login', 'uses' => 'UserController@getLogin' ));
 
-Route::post('/login', array( 'as' => 'login',
-    function()
-    {
-        $credentials    = Input::only('username', 'password');
-        $remember       = Input::has('remember');
+Route::post('/login', array( 'as' => 'login', 'uses' => 'UserController@postLogin' ));
 
-
-        if ( Auth::attempt( $credentials, $remember ) ) {
-            return Redirect::intended('/');
-        }
-
-        return Redirect::route('login');
-    }
-));
-
-Route::get('/logout', array( 'as' => 'logout',
-    function()
-    {
-        Auth::logout();
-        return Redirect::route('home');
-    }
-));
+Route::get('/logout', array( 'as' => 'logout', 'uses' => 'UserController@getLogout' ));
 
 Route::get('/register', array( 'as' => 'register',
     function ()

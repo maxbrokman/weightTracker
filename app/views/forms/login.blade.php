@@ -1,14 +1,35 @@
+@extends('layouts.standard')
+
+@section('main')
+
+@if ( $form_errors )
+@foreach( $form_errors as $error )
+    <div class="alert alert-danger">
+        {{{ $error }}}
+    </div>
+@endforeach
+@endif
+
 {{ Form::open( array( 'route' => 'login' )) }}
 
-    {{ Form::label('username', 'Username') }}
-    {{ Form::text('username', '') }}
+    <div class="form-group">
+        {{ Form::label('username', 'Username') }}
+        {{ Form::text('username', '', array( 'class' => "form-control" )) }}
+    </div>
 
-    {{ Form::label('password', 'Password') }}
-    {{ Form::password('password') }}
+    <div class="form-group">
+        {{ Form::label('password', 'Password') }}
+        {{ Form::password('password', array( 'class' => "form-control" )) }}
+    </div>
 
-    {{ Form::label('remember', 'Remember Me') }}
-    {{ Form::checkbox('remember', 1) }}
+    <div class="checkbox">
+        {{ Form::label('remember', 'Remember Me') }}
+        {{ Form::checkbox('remember', 1) }}
+    </div>
 
-    {{ Form::submit('Login') }}
+    <div class="form-group">
+        {{ Form::submit('Login', array( 'class' => "btn btn-primary" )) }}
+    </div>
 
 {{ Form::close() }}
+@stop
