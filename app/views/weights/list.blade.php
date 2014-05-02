@@ -80,8 +80,14 @@
             postUnits: "kg",
             // turn off hover
             hideHover: true,
-            //ymin false origin
-            ymin: 'auto',
+            ymin: 'auto ' + ( Math.min.apply(
+                Math, weightDataJSON.map(function(o){
+                    return o.weight;
+                })) - 5 ),
+            ymax: 'auto ' + ( Math.max.apply(
+                Math, weightDataJSON.map(function(o){
+                    return o.weight;
+                })) + 5 ),
             //xLabels: "day",
             xLabelFormat: function(x) {
                 return x.getDate() + ' / ' + ( x.getMonth() + 1 );
