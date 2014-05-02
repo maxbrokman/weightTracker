@@ -63,7 +63,7 @@ class WeightController extends \BaseController {
     {
         $userId = Auth::user()->id;
 
-        $weights = $this->getWeightsWithChange( $userId );
+        $weights = $this->getWeightsWithChange( $userId )->sortBy('created_at', SORT_REGULAR, true);
 
         $dailyWeights = $this->getDailyWeightForMonth($userId);
 
@@ -79,15 +79,14 @@ class WeightController extends \BaseController {
     public function getWeightsWithChange( $userId )
     {
         $weights = Weight::where('user_id', '=', $userId)
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'ASC')
             ->get( array(
                 'id',
                 'weight',
                 'created_at'
             ));
 
-
-
+        //add changes
         $i = 0;
         foreach( $weights as $weight ) {
 
